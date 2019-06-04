@@ -25,7 +25,28 @@ router.get("/", (req, res) => {
 
 // READ - GET /api/zoos/:id
 router.get("/:id", validateId, (req, res) => {
-  res.status(200).json(req.zoo);
+  const zoo = req.zoo;
+  res.status(200).json(zoo);
+});
+
+// UPDATE - PUT /api/zoos/:id
+router.put("/:id", validateId, (req, res) => {
+  const updatedInfo = req.zoo;
+  const { id } = req.params;
+  Zoos.update(updatedInfo, id)
+    .then(updatedZoo => {
+      res.status(201).json(updatedZoo);
+    })
+    .catch(err => res.status(500).json({ message: "Error updating zoo" }));
+});
+
+// DELETE - DELETE /api/zoos/:id
+router.delete("/:id", validateId, (req, res) => {
+  Zoos.remove(req.params.id)
+    .then(removedZoo => {
+      res.status(204).end();
+    })
+    .catch(err => res.status(500).json({ message: "Error deleting zoo" }));
 });
 
 // Middleware
