@@ -31,7 +31,7 @@ router.get("/:id", validateId, (req, res) => {
 
 // UPDATE - PUT /api/zoos/:id
 router.put("/:id", validateId, (req, res) => {
-  const updatedInfo = req.zoo;
+  const updatedInfo = req.body;
   const { id } = req.params;
   Zoos.update(updatedInfo, id)
     .then(updatedZoo => {

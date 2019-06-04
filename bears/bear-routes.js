@@ -24,6 +24,27 @@ router.get("/:id", validateId, (req, res) => {
   res.status(200).json(req.bear);
 });
 
+// UPDATE - PUT /api/bears/:id
+router.put("/:id", validateId, (req, res) => {
+  const { id } = req.params;
+  const updatedInfo = req.body;
+  console.log(updatedInfo);
+  Bears.update(updatedInfo, id)
+    .then(updatedBear => {
+      res.status(201).json(updatedBear);
+    })
+    .catch(err => res.status(500).json({ message: "Error updating bear" }));
+});
+
+router.delete("/:id", validateId, (req, res) => {
+  const { id } = req.params;
+  Bears.remove(id)
+    .then(bear => {
+      res.status(204).end();
+    })
+    .catch(err => res.status(500).json({ message: "Error deleting bear" }));
+});
+
 function validateBear(req, res, next) {
   if (!req.body.name) {
     res.status(400).json({ message: "Missing required field name" });

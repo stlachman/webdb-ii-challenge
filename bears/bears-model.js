@@ -13,7 +13,9 @@ const db = knex(knexConfig);
 module.exports = {
   find,
   findById,
-  add
+  add,
+  update,
+  remove
 };
 
 function find() {
@@ -28,4 +30,16 @@ function findById(id) {
 
 function add(bear) {
   return db("bears").insert(bear, "id");
+}
+
+function update(bear, id) {
+  return db("bears")
+    .where({ id })
+    .update(bear);
+}
+
+function remove(id) {
+  return db("bears")
+    .where({ id })
+    .del();
 }
