@@ -12,11 +12,18 @@ const db = knex(knexConfig);
 
 module.exports = {
   find,
+  findById,
   add
 };
 
 function find() {
   return db("zoos");
+}
+
+function findById(id) {
+  return db("zoos")
+    .where({ id })
+    .first();
 }
 
 function add(zoo) {
