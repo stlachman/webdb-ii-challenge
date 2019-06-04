@@ -28,7 +28,7 @@ router.get("/:id", validateId, (req, res) => {
 router.put("/:id", validateId, (req, res) => {
   const { id } = req.params;
   const updatedInfo = req.body;
-  console.log(updatedInfo);
+
   Bears.update(updatedInfo, id)
     .then(updatedBear => {
       res.status(201).json(updatedBear);
