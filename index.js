@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const server = express();
 
 const zooRouter = require("./zoo/zoo-routes.js");
+const bearRouter = require("./bears/bear-routes.js");
 
 server.use(express.json());
 server.use(helmet());
@@ -13,6 +14,7 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/zoos", zooRouter);
+server.use("/api/bears", bearRouter);
 
 // endpoints here
 

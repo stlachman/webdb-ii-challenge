@@ -23,9 +23,12 @@ function find() {
 }
 
 function findById(id) {
-  return db("zoos")
-    .where({ id })
-    .first();
+  return (
+    db("zoos")
+      // Destructuring where id: id passed into functino
+      .where({ id })
+      .first()
+  );
 }
 
 function add(zoo) {
